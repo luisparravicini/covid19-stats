@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-path = 'COVID-19-geographic-disbtribution-worldwide-2020-03-20.xlsx'
+date = '2020-03-20'
+path = f'COVID-19-geographic-disbtribution-worldwide-{date}.xlsx'
 df = pd.read_excel(path)
 df.rename(columns={'DateRep': 'Date'}, inplace=True)
 df = df.sort_values('Date', ascending=True)
@@ -18,6 +19,7 @@ for geoid in ('AR', 'BR', 'CL', 'BO', 'PE', 'UY', 'PY', 'EC', 'CO', 'VE'):
 
 plt.legend()
 plt.xlabel('Fecha')
-plt.ylabel('Casos')
+plt.ylabel('Casos confirmados')
+plt.title(f'Casos confirmados por país al {date}')
 
 plt.show()
