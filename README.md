@@ -3,4 +3,4 @@ The script makes some graphs on covid19 cases using data from the [European Cent
 ![plot 01](plot_01.png "LATAM confirmed cases")
 
 
-**DISCLAIMER**: I'm just playing aournd with the dataset and matplotlib, the graphs might not be accurate and/or have errors.
+**DISCLAIMER**: I'm just playing around with the dataset and matplotlib, the graphs might not be accurate and/or have errors.
