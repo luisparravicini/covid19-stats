@@ -26,8 +26,7 @@ for geoid in countries:
 
 fig.autofmt_xdate()
 plt.legend()
-plt.xlabel('Fecha')
-plt.ylabel('Casos confirmados')
-plt.title(f'Casos confirmados al {date}')
+plt.ylabel('Casos')
+plt.title(f'Casos sudamérica confirmados al {date}')
 
 plt.show()
