@@ -19,7 +19,6 @@ for geoid in countries:
     geo_df = df[df['GeoId'] == geoid]
     geo_df['Cumulative'] = geo_df['Cases'].cumsum()
     geo_df['GrowthRate'] = geo_df['Cumulative'].pct_change()
-    geo_df['Cumulative'] = geo_df['Cumulative'].replace(0, np.nan)
     name = geo_df['Countries and territories'].iloc[0]
 
     ax.plot(geo_df['Date'], geo_df['GrowthRate'], label=name)
