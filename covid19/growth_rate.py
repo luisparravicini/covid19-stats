@@ -17,7 +17,7 @@ fig, ax = plt.subplots()
 countries = ('AR', 'BR', 'CL', 'BO', 'PE', 'UY', 'PY', 'EC', 'CO', 'VE')
 for geoid in countries:
     geo_df = df[df['GeoId'] == geoid]
-    geo_df['Cumulative'] = geo_df['Cases'].cumsum()
+    geo_df['Cumulative'] = geo_df['Deaths'].cumsum()
     geo_df['GrowthRate'] = geo_df['Cumulative'].pct_change()
     name = geo_df['Countries and territories'].iloc[0]
 
