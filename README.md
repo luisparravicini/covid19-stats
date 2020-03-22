@@ -5,8 +5,13 @@ The script makes some graphs on covid19 cases using data from the [European Cent
 
 ##How to run the scripts
 
-python -m covid19.rate
-python -m covid19.confirmed_cases
+Each script creates a graphic:
+
+Growth rate of cases:
+``python -m covid19.rate``
+
+Confirmed cases:
+``python -m covid19.confirmed_cases``
 
 **DISCLAIMER**: I'm no statistician, data scientist, epidemiologist, nor I have any knowledge on viruses. I just have some free time and I'm playing around with the dataset and matplotlib, the graphs might not be accurate and/or have errors.
 
