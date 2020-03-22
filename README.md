@@ -7,7 +7,7 @@ The script makes some graphs on covid19 cases using data from the [European Cent
 Each script creates a graphic:
 
 Growth rate of cases:
-``python -m covid19.rate``
+``python -m covid19.growth_rate``
 
 ![plot 02](plot_02.png "Growth rate")
 
