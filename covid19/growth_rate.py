@@ -28,6 +28,6 @@ ax.axhline(y=1, linestyle='--')
 fig.autofmt_xdate()
 plt.legend()
 plt.ylabel('Rate')
-plt.title(f'Velocidad crecimiento de casos al {date}')
+plt.title('Confirmed cases growth rate')
 
 plt.show()
