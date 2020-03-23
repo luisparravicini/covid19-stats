@@ -22,7 +22,7 @@ for geoid in countries:
     name = geo_df['Countries and territories'].iloc[0].replace('_', ' ')
     inhabitants = populations[name] / 1000000
     geo_df['Cumulative'] = (geo_df['Cases'].cumsum() / inhabitants).replace(0, np.nan)
-    # geo_df['CumulativeDeaths'] = geo_df['Deaths'].cumsum().replace(0, np.nan)
+    # geo_df['CumulativeDeaths'] = (geo_df['Deaths'].cumsum() / inhabitants).replace(0, np.nan)
 
     ax.plot(geo_df['Date'], geo_df['Cumulative'], label=name)
     # ax[1].plot(geo_df['Date'], geo_df['CumulativeDeaths'], label=name)
