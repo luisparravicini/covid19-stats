@@ -3,6 +3,8 @@ from datetime import datetime
 import requests
 import sys
 import re
+from bs4 import BeautifulSoup
+import json
 
 
 def find_newest_dataset():
@@ -30,3 +32,29 @@ def find_newest_dataset():
             date = match.group(1)
             print(f'using {fname}')
     return (fname, date)
+
+
+def countries_population():
+    path = Path('population.json')
+    if path.exists():
+        with open(path) as file:
+            return json.load(file)
+
+    print('fetching countries populations')
+    res = requests.get('https://www.worldometers.info/world-population/population-by-country/')
+    res.raise_for_status()
+
+    population = dict()
+
+    soup = BeautifulSoup(res.content, 'html.parser')
+    for row in soup.table.find_all('tr'):
+        cols = row.find_all('td')
+        if len(cols) > 0:
+            name = cols[1].text
+            n = int(cols[2].text.replace(',', ''))
+            population[name] = n
+
+    with open(path, 'w') as file:
+        json.dump(population, file)
+
+    return population
