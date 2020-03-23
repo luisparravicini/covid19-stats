@@ -14,7 +14,8 @@ df = df.sort_values('Date', ascending=True)
 df.set_index('Date')
 
 fig, ax = plt.subplots()
-countries = ('AR', 'BR', 'CL', 'BO', 'PE', 'UY', 'PY', 'EC', 'CO', 'VE')
+countries = ('ES', 'IT', 'BE', 'NL', 'FR', 'DE', 'PT')
+#('AR', 'BR', 'CL', 'BO', 'PE', 'UY', 'PY', 'EC', 'CO', 'VE')
 for geoid in countries:
     geo_df = df[df['GeoId'] == geoid]
     geo_df['Cumulative'] = geo_df['Deaths'].cumsum()
