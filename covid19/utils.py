@@ -7,6 +7,9 @@ from bs4 import BeautifulSoup
 import json
 
 
+def name_for(df):
+    return df['Countries and territories'].iloc[0].replace('_', ' ')
+
 def find_newest_dataset(download=True):
     date = datetime.today().strftime('%Y-%m-%d')
     fname_prefix = 'COVID-19-geographic-disbtribution-worldwide'

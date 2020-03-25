@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from .utils import find_newest_dataset
+from .utils import find_newest_dataset, name_for
 from datetime import datetime
 from pandas.plotting import register_matplotlib_converters
 
@@ -18,7 +18,7 @@ today = datetime.today()
 countries = df['GeoId'].dropna().unique()
 for geoid in countries:
     geo_df = df[df['GeoId'] == geoid]
-    name = geo_df['Countries and territories'].iloc[0].replace('_', ' ')
+    name = name_for(geo_df)
 
     geo_df['Cumulative'] = geo_df['Deaths'].cumsum()
     max_deaths = geo_df['Cumulative'].iloc[-1]

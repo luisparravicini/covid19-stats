@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from .utils import find_newest_dataset, countries_population
+from .utils import find_newest_dataset, countries_population, name_for
 from pandas.plotting import register_matplotlib_converters
 
 register_matplotlib_converters()
@@ -19,7 +19,7 @@ fig, ax = plt.subplots()
 countries = ('AR', 'BR', 'CL', 'BO', 'PE', 'UY', 'PY', 'EC', 'CO', 'VE')
 for geoid in countries:
     geo_df = df[df['GeoId'] == geoid]
-    name = geo_df['Countries and territories'].iloc[0].replace('_', ' ')
+    name = name_for(geo_df)
     inhabitants = populations[name] / 1000000
     geo_df['Cumulative'] = (geo_df['Cases'].cumsum() / inhabitants).replace(0, np.nan)
     # geo_df['CumulativeDeaths'] = (geo_df['Deaths'].cumsum() / inhabitants).replace(0, np.nan)
