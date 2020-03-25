@@ -30,7 +30,7 @@ def find_newest_dataset(download=True):
                     with open(fname, 'wb') as f:
                         f.write(res.content)
 
-        data_files = sorted(Path('.').glob('*.xlsx'))
+        data_files = sorted(Path('.').glob(fname_prefix + '*'))
         if len(data_files) == 0:
             print('no data files')
             sys.exit(1)
