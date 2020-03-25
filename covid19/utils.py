@@ -22,14 +22,15 @@ def find_newest_dataset(download=True):
             link = soup.select_one('.download a')
             href = link.get('href')
 
-            print(f'fetching data file')
-            fname = Path(href).name
-            res = requests.get(href)
-            if res.status_code == 200:
-                with open(fname, 'wb') as f:
-                    f.write(res.content)
+            fname = Path('.', Path(href).name)
+            if not fname.exists():
+                print(f'fetching data file')
+                res = requests.get(href)
+                if res.status_code == 200:
+                    with open(fname, 'wb') as f:
+                        f.write(res.content)
 
-        data_files = sorted(Path('.').glob(fname_prefix + '*'))
+        data_files = sorted(Path('.').glob('*.xlsx'))
         if len(data_files) == 0:
             print('no data files')
             sys.exit(1)
