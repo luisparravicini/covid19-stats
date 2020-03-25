@@ -8,7 +8,7 @@ register_matplotlib_converters()
 
 
 populations = countries_population()
-path, date = find_newest_dataset()
+path, date = find_newest_dataset(download=True)
 df = pd.read_excel(path)
 df.rename(columns={'DateRep': 'Date'}, inplace=True)
 df = df.sort_values('Date', ascending=True)
