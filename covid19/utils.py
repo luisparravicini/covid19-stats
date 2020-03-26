@@ -12,8 +12,8 @@ def name_for(df):
 
 def find_newest_dataset(download=True):
     date = datetime.today().strftime('%Y-%m-%d')
-    fname_prefix = 'COVID-19-geographic-disbtribution-worldwide'
-    fname = Path(f'{fname_prefix}-{date}.xlsx')
+    fname_prefix = 'covid19-data-'
+    fname = Path(f'{fname_prefix}{date}.xlsx')
 
     if not fname.exists():
         if download:
@@ -25,7 +25,7 @@ def find_newest_dataset(download=True):
             link = soup.select_one('.download a')
             href = link.get('href')
 
-            fname = Path('.', Path(href).name)
+            fname = Path('.', f'{fname_prefix}{date}.xlsx')
             if not fname.exists():
                 print(f'fetching data file')
                 res = requests.get(href)
