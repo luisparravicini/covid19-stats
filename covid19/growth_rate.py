@@ -47,7 +47,7 @@ curves = pd.DataFrame(
             columns=['x'] + list(map(lambda x: f'd{x}', indexes))
         )
 for d in indexes:
-    ax.plot(curves['x'], curves[f'd{d}'], linestyle='--', label=f'doubles in {d} days')
+    ax.plot(curves['x'], curves[f'd{d}'], linestyle='--', label=f'doubles every {d} days')
 
 
 ax.set_yscale('log')
