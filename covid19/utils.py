@@ -1,10 +1,20 @@
 from pathlib import Path
+import pandas as pd
 from datetime import datetime
 import requests
 import sys
 import re
 from bs4 import BeautifulSoup
 import json
+
+
+def read_dataset():
+    path = find_newest_dataset(download=True)
+    df = pd.read_excel(path)
+    df.rename(columns={'dateRep': 'date'}, inplace=True)
+    df = df.sort_values('date', ascending=True)
+    df.set_index('date')
+    return df
 
 
 def name_for(df):
@@ -46,7 +56,7 @@ def find_newest_dataset(download=True):
         date = match.group(1)
         print(f'using {fname}')
 
-    return (fname, date)
+    return fname
 
 
 def countries_population():

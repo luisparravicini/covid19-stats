@@ -1,18 +1,14 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from .utils import find_newest_dataset, countries_population, name_for
+from .utils import read_dataset, countries_population, name_for
 from pandas.plotting import register_matplotlib_converters
 
 register_matplotlib_converters()
 
 
 populations = countries_population()
-path, date = find_newest_dataset(download=True)
-df = pd.read_excel(path)
-df.rename(columns={'dateRep': 'date'}, inplace=True)
-df = df.sort_values('date', ascending=True)
-df.set_index('date')
+df = read_dataset()
 
 fig, ax = plt.subplots()
 #countries = df['GeoId'].dropna().unique()
