@@ -34,22 +34,20 @@ for geoid in countries:
 indexes = (2, 3, 5, 10)
 data = list()
 for i in range(max_days):
-    datum = [i] + list(map(lambda x: np.power(2, i / x), indexes))
+    datum = [i] + list(map(lambda x: min_deaths * np.power(2, i / x), indexes))
     data.append(datum)
 
 curves = pd.DataFrame(
             data=data,
             columns=['x'] + list(map(lambda x: f'd{x}', indexes))
         )
-print(curves.iloc[0:10])
-print(curves.iloc[15:25])
 for d in indexes:
     ax.plot(curves['x'], curves[f'd{d}'], linestyle='--', label=f'doubles every {d} days')
 
 
-# ax.set_yscale('log')
+ax.set_yscale('log')
 plt.legend()
-plt.ylim(top=max_deaths, bottom=1)
+plt.ylim(top=max_deaths, bottom=min_deaths)
 plt.ylabel('Deaths')
 plt.xlabel(f'Days since first {min_deaths} deaths')
 plt.title('Cumulative deaths')
