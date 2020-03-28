@@ -8,7 +8,7 @@ import json
 
 
 def name_for(df):
-    return df['Countries and territories'].iloc[0].replace('_', ' ')
+    return df['countriesAndTerritories'].iloc[0].replace('_', ' ')
 
 
 def find_newest_dataset(download=True):

@@ -9,32 +9,32 @@ register_matplotlib_converters()
 
 path, date = find_newest_dataset(download=True)
 df = pd.read_excel(path)
-df.rename(columns={'DateRep': 'Date'}, inplace=True)
-df = df.sort_values('Date', ascending=True)
-df.set_index('Date')
+df.rename(columns={'dateRep': 'date'}, inplace=True)
+df = df.sort_values('date', ascending=True)
+df.set_index('date')
 
 fig, ax = plt.subplots()
 
 countries = ('CN', 'IT', 'ES', 'EC', 'BR', 'CL', 'EC', 'CO', 'US', 'MX')
-countries = ('CN', 'IT', 'AR', 'EC', 'MX', 'BR', 'US')
+countries = ('CN', 'ES', 'IT', 'AR', 'EC', 'MX', 'BR', 'US')
 max_days = 0
 min_deaths = 5
 max_deaths = 0
 for geoid in countries:
-    geo_df = df[df['GeoId'] == geoid].copy()
+    geo_df = df[df['geoId'] == geoid].copy()
 
-    geo_df['Cumulative'] = geo_df['Deaths'].cumsum()
+    geo_df['cumulative'] = geo_df['deaths'].cumsum()
 
-    geo_df.drop(index=geo_df[geo_df['Cumulative'] < min_deaths].index,
+    geo_df.drop(index=geo_df[geo_df['cumulative'] < min_deaths].index,
                 inplace=True)
-    geo_df['Cumulative'] -= min_deaths
+    geo_df['cumulative'] -= min_deaths
 
-    geo_df['DaysSince'] = range(len(geo_df))
+    geo_df['daysSince'] = range(len(geo_df))
 
-    ax.plot(geo_df['DaysSince'], geo_df['Cumulative'], label=name_for(geo_df))
+    ax.plot(geo_df['daysSince'], geo_df['cumulative'], label=name_for(geo_df))
 
     max_days = max(max_days, len(geo_df))
-    max_deaths = max(max_deaths, geo_df['Cumulative'].iloc[-1])
+    max_deaths = max(max_deaths, geo_df['cumulative'].iloc[-1])
 
 indexes = (2, 3, 5, 10)
 data = list()
@@ -46,11 +46,13 @@ curves = pd.DataFrame(
             data=data,
             columns=['x'] + list(map(lambda x: f'd{x}', indexes))
         )
+print(curves.iloc[0:10])
+print(curves.iloc[15:25])
 for d in indexes:
     ax.plot(curves['x'], curves[f'd{d}'], linestyle='--', label=f'doubles every {d} days')
 
 
-ax.set_yscale('log')
+# ax.set_yscale('log')
 plt.legend()
 plt.ylim(top=max_deaths, bottom=1)
 plt.ylabel('Deaths')
