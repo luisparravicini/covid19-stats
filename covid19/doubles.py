@@ -25,5 +25,5 @@ for geoid in countries:
 
     row = geo_df[geo_df['cumulative'] >= half_current_max].iloc[0]
 
-    doubles_in = (today - row['date']).days
+    doubles_in = round((today - row['date']).total_seconds() / (24 * 3600))
     print("\t".join(map(str, (doubles_in, max_deaths, name))))
