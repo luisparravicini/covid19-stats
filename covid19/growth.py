@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from .utils import read_dataset, name_for
 from datetime import timedelta
-import itertools
 from pandas.plotting import register_matplotlib_converters
 
 register_matplotlib_converters()
@@ -25,7 +24,7 @@ def find_doubles(df, cumName, dataName):
 
 df = read_dataset()
 fig, ax = plt.subplots(4, 3, sharex=True)
-axes = list(itertools.chain(*ax))
+axes = list(ax.flat)
 
 last_date = df['date'].max()
 start_date = last_date - timedelta(days=30)
