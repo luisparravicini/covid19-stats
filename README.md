@@ -6,6 +6,13 @@ The script makes some graphs on covid19 cases using data from the [European Cent
 
 Each script creates a graphic:
 
+Trend lines:
+``python -m covid19.growth``
+
+![plot 04](plot_04.png "Growth")
+
+This is created by finding for each date how many days are needed to double confirmed cases / deaths. If the speed is decelerating then lines will do gown (actually, up, the Y axis is inverted!).
+
 Confirmed cases:
 ``python -m covid19.confirmed_cases``
 
