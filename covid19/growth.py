@@ -24,15 +24,13 @@ def find_doubles(df, cumName, dataName):
 
 df = read_dataset()
 fig, ax = plt.subplots(4, 3, sharex=True)
-axes = list(ax.flat)
 
 last_date = df['date'].max()
 start_date = last_date - timedelta(days=30)
 
-countries = ('NL', 'CN', 'AR', 'IT', 'ES', 'EC', 'BR', 'CL', 'EC', 'CO', 'US', 'MX')
+countries = ('NL', 'CN', 'AR', 'IT', 'ES', 'EC', 'BR', 'CL', 'UY', 'CO', 'US', 'MX')
 
-for geoid in countries:
-    ax = axes.pop()
+for geoid, ax in zip(countries, ax.flat):
     country_df = df[df['geoId'] == geoid]
     data = [[], [], []]
     for date in pd.date_range(start_date, last_date):
