@@ -69,7 +69,10 @@ fig.text(0.5, 0.05, 'Weeks', ha='center')
 fig.text(0.05, 0.5, 'Days to double', va='center', rotation='vertical')
 
 fig.autofmt_xdate()
-fig.suptitle('Trends')
+
+start_date = start_date.date()
+last_date = last_date.date()
+fig.suptitle(f'Trends ({start_date} to {last_date})')
 
 plt.xticks(ticks=pd.date_range(start_date, last_date, freq='1w'), labels=[])
 
