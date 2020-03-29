@@ -51,7 +51,7 @@ for geoid, ax in zip(countries, ax.flat):
         data[1].append(doubles_deaths_in)
         data[2].append(doubles_cases_in)
 
-    ax.set_title(name_for(geo_df))
+    ax.set_title(name_for(geo_df), fontsize=10)
 
     min_y = 10
     if max([x for x in data[1] + data[2] if x is not None]) < min_y:
@@ -72,8 +72,11 @@ fig.autofmt_xdate()
 
 start_date = start_date.date()
 last_date = last_date.date()
-fig.suptitle(f'Trends ({start_date} to {last_date})')
+fig.text(0.5, 0.92, f'({start_date} to {last_date})',
+         fontsize=10, horizontalalignment='center')
+fig.suptitle(f'Trends', fontsize=12)
 
 plt.xticks(ticks=pd.date_range(start_date, last_date, freq='1w'), labels=[])
+plt.tight_layout(rect=[0.05, 0.075, 1, 0.9])
 
 plt.show()
