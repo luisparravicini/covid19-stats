@@ -1,4 +1,5 @@
 pandas
 xlrd
 requests
+matplotlib
 beautifulsoup4
