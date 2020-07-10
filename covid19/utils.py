@@ -4,16 +4,16 @@ from datetime import datetime
 import requests
 import sys
 import re
-from bs4 import BeautifulSoup
 import json
 
 
 def read_dataset():
     path = find_newest_dataset(download=True)
-    df = pd.read_excel(path)
+    df = pd.read_csv(path, parse_dates=['dateRep'], dayfirst=True)
     df.rename(columns={'dateRep': 'date'}, inplace=True)
     df = df.sort_values('date', ascending=True)
     df.set_index('date')
+    print(df)
     return df
 
 
@@ -24,25 +24,16 @@ def name_for(df):
 def find_newest_dataset(download=True):
     date = datetime.today().strftime('%Y-%m-%d')
     fname_prefix = 'covid19-data-'
-    fname = Path(f'{fname_prefix}{date}.xlsx')
+    fname = Path(f'{fname_prefix}{date}.csv')
 
     if not fname.exists():
         if download:
-            print('looking for new data files')
-            DOWNLOAD_URL = 'https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide'
-            res = requests.get(DOWNLOAD_URL)
-            res.raise_for_status()
-            soup = BeautifulSoup(res.content, 'html.parser')
-            link = soup.select_one('.download a')
-            href = link.get('href')
-
-            fname = Path('.', f'{fname_prefix}{date}.xlsx')
-            if not fname.exists():
-                print(f'fetching data file')
-                res = requests.get(href)
-                if res.status_code == 200:
-                    with open(fname, 'wb') as f:
-                        f.write(res.content)
+            print(f'fetching data file')
+            url = 'https://opendata.ecdc.europa.eu/covid19/casedistribution/csv'
+            res = requests.get(url)
+            if res.status_code == 200:
+                with open(fname, 'wb') as f:
+                    f.write(res.content)
 
         data_files = sorted(Path('.').glob(fname_prefix + '*'))
         if len(data_files) == 0:
