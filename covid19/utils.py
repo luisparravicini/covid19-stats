@@ -13,7 +13,6 @@ def read_dataset():
     df.rename(columns={'dateRep': 'date'}, inplace=True)
     df = df.sort_values('date', ascending=True)
     df.set_index('date')
-    print(df)
     return df
 
 
